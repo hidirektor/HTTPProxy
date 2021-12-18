@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.t3sl4.httpproxy.Controllers.ProxyController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Start" />
+                        <MenuItem mnemonicParsing="false" text="Stop" />
+                        <MenuItem mnemonicParsing="false" text="Report" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Add host to filter" />
+                        <MenuItem mnemonicParsing="false" text="Display current filtered hosts" />
+                        <MenuItem mnemonicParsing="false" text="Exit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#developedByAction" text="About Dev" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane prefHeight="381.0" prefWidth="640.0">
+            <children>
+                <Label alignment="CENTER" layoutX="222.0" layoutY="148.0" prefHeight="40.0" prefWidth="195.0" text="Proxy Server Status" />
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>

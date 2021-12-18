@@ -1,2 +1,2 @@
-# HTTPProxy
-HTTP proxy application with javaFX framework.
+# TFEncoder
+Proxy server application via javaFX graphical interface.
