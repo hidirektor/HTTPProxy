@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.t3sl4.httpproxy.Controllers.ProxyController">
     <children>
@@ -18,8 +21,8 @@
                         <MenuItem mnemonicParsing="false" onAction="#stopServerAction" text="Stop" />
                         <MenuItem mnemonicParsing="false" text="Report" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Add host to filter" />
-                        <MenuItem mnemonicParsing="false" text="Display current filtered hosts" />
+                        <MenuItem mnemonicParsing="false" onAction="#addHostToFilter" text="Add host to filter" />
+                        <MenuItem mnemonicParsing="false" onAction="#displayFilteredHosts" text="Display current filtered hosts" />
                         <MenuItem mnemonicParsing="false" onAction="#exitProgram" text="Exit" />
                     </items>
                 </Menu>
@@ -32,7 +35,13 @@
         </MenuBar>
         <AnchorPane prefHeight="381.0" prefWidth="640.0">
             <children>
-                <Label alignment="CENTER" layoutX="222.0" layoutY="148.0" prefHeight="40.0" prefWidth="195.0" text="Proxy Server Status" />
+                <Label alignment="CENTER" layoutX="167.0" layoutY="215.0" prefHeight="40.0" prefWidth="195.0" text="Proxy Server Status:">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font></Label>
+                <ImageView fx:id="serverStatusImage" fitHeight="93.0" fitWidth="122.0" layoutX="351.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
+                <Button layoutX="161.0" layoutY="71.0" mnemonicParsing="false" onAction="#openWindowsTerminal" text="Terminali Aç" />
+                <Button layoutX="351.0" layoutY="71.0" mnemonicParsing="false" onAction="#copyTestCode" text="Proxy Test Komutunu Kopyala !" />
             </children>
         </AnchorPane>
     </children>

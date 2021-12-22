@@ -1,5 +1,7 @@
 package me.t3sl4.httpproxy.Server;
 
+import me.t3sl4.httpproxy.Controllers.ProxyController;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
@@ -89,37 +91,42 @@ public class ServerHandler implements Runnable {
 
             path = ((tmpPath == "") ? "/" : tmpPath);
             System.out.println("HTTP Method: " + method);
-            if (method.equals("GET")) {
-                pC.add("Client requests...\r\nHost: " + host + "\r\nPath: " + path);
-
-                new Thread(this).start();
-            } else {
-                // pC.add("Error for request: " + url);
-
-                String html = "<html>\r\n" + "<body>\r\n" + "<h1>Method Not Allowed</h1>\r\n" + "</body>\r\n"
-                        + "</html>";
-
-                int htmlSize= html.length();
-
-                String response = "HTTP/1.1 405 Method Not Allowed\r\n" +
-                        "Content-Type: text/html\r\n" +
-                        "Content-Length: " + htmlSize + "\r\n" +
-                        "Date: " + new Date() + "\r\n" +
-                        "Connection: close\r\n\r\n" + html;
-
-                outToClient.writeBytes(response);
-
+            if(ProxyController.filteredHosts.contains("http://" + host)) {
+                System.out.println("The URL you specified is in the black list.");
                 s.close();
-                // HTTP/1.1 405 Method Not Allowed
-                // Content-Type: text/html
-                // Content-Length: SIZE
-                // Date: new Date();
-                //
-                // <html>
-                // <body>
-                // <h1>Method Not Allowed</h1>
-                // </body>
-                // </html>
+            } else {
+                if (method.equals("GET")) {
+                    pC.add("Client requests...\r\nHost: " + host + "\r\nPath: " + path);
+
+                    new Thread(this).start();
+                } else {
+                    // pC.add("Error for request: " + url);
+
+                    String html = "<html>\r\n" + "<body>\r\n" + "<h1>Method Not Allowed</h1>\r\n" + "</body>\r\n"
+                            + "</html>";
+
+                    int htmlSize= html.length();
+
+                    String response = "HTTP/1.1 405 Method Not Allowed\r\n" +
+                            "Content-Type: text/html\r\n" +
+                            "Content-Length: " + htmlSize + "\r\n" +
+                            "Date: " + new Date() + "\r\n" +
+                            "Connection: close\r\n\r\n" + html;
+
+                    outToClient.writeBytes(response);
+
+                    s.close();
+                    // HTTP/1.1 405 Method Not Allowed
+                    // Content-Type: text/html
+                    // Content-Length: SIZE
+                    // Date: new Date();
+                    //
+                    // <html>
+                    // <body>
+                    // <h1>Method Not Allowed</h1>
+                    // </body>
+                    // </html>
+                }
             }
 
         } catch (Exception e) {
