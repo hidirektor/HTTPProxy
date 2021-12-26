@@ -71,12 +71,37 @@ public class ProxyController extends AbstractController implements Initializable
         serverStatusImage.setImage(serverStopIcon);
     }
 
-    public void openWindowsTerminal() {
-        try {
-            String command = "\"C:\\WINDOWS\\system32\\cmd.exe\"";
+    public void showReportPopup() {
+        showReportWindow();
+    }
 
-            Runtime run  = Runtime.getRuntime();
-            Process proc = run.exec(command);
+    public void testGETMethod() {
+        try {
+            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"curl -v -H \"Connection: close\" -x http://localhost:8080 http://www.yandex.com.tr\"");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void testPOSTMethod() {
+        try {
+            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"curl -v -H \"Connection: close\" -x http://localhost:8080 http://www.yandex.com.tr\"");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void testHEADMethod() {
+        try {
+            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"curl -v -H \"Connection: close\" -x http://localhost:8080 http://www.yandex.com.tr\"");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void testCONNECTMethod() {
+        try {
+            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"curl -v -H \"Connection: close\" -x http://localhost:8080 http://www.yandex.com.tr\"");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -177,6 +202,33 @@ public class ProxyController extends AbstractController implements Initializable
             popupStage.getIcons().add(popupIcon);
             popupStage.setResizable(false);
             popupStage.setTitle("Filtered Hosts");
+            popupStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "FXML dosyası yüklenemedi.").show();
+        }
+    }
+
+    private void showReportWindow() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(HTTPProxy.class.getResource("Report.fxml"));
+
+        ReportController reportController = new ReportController();
+        loader.setController(reportController);
+        Parent layout;
+        try {
+            layout = loader.load();
+            Scene scene = new Scene(layout);
+            Stage popupStage = new Stage();
+            reportController.setStage(popupStage);
+            if(this.main!=null) {
+                popupStage.initOwner(main.getPrimaryStage());
+            }
+            popupStage.initModality(Modality.WINDOW_MODAL);
+            popupStage.setScene(scene);
+            popupStage.getIcons().add(popupIcon);
+            popupStage.setResizable(false);
+            popupStage.setTitle("Report");
             popupStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();

@@ -3,8 +3,9 @@ package me.t3sl4.httpproxy.Server;
 import me.t3sl4.httpproxy.Controllers.ProxyController;
 
 import java.io.*;
-import java.net.Socket;
-import java.net.URL;
+import java.net.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -15,16 +16,13 @@ public class ServerHandler implements Runnable {
     DataOutputStream outToClient;
 
     String host;
-
     String path;
-
     String url;
-
     String hd;
-
     String constructedHD = "";
-
     String reqHeaderRemainingLines;
+    String responseCode;
+    String method;
 
     PrinterClass pC;
 
@@ -61,7 +59,7 @@ public class ServerHandler implements Runnable {
             int sp2 = hd.indexOf(' ', sp1 + 1);
             int eol = hd.indexOf('\r');
 
-            String method = hd.substring(0, sp1);
+            method = hd.substring(0, sp1);
 
             reqHeaderRemainingLines = hd.substring(eol + 2);
 
@@ -92,16 +90,20 @@ public class ServerHandler implements Runnable {
             path = ((tmpPath == "") ? "/" : tmpPath);
             System.out.println("HTTP Method: " + method);
             if(ProxyController.filteredHosts.contains("http://" + host)) {
+                responseCode = "401";
+                printReport();
                 System.out.println("The URL you specified is in the black list.");
                 s.close();
             } else {
-                if (method.equals("GET")) {
+                if (method.equals("GET") || method.equals("HEAD") || method.equals("POST") || method.equals("CONNECT")) {
+                    responseCode = "200";
+                    printReport();
                     pC.add("Client requests...\r\nHost: " + host + "\r\nPath: " + path);
-
                     new Thread(this).start();
                 } else {
-                    // pC.add("Error for request: " + url);
-
+                    responseCode =  "405";
+                    pC.add("Error for request: " + url);
+                    printReport();
                     String html = "<html>\r\n" + "<body>\r\n" + "<h1>Method Not Allowed</h1>\r\n" + "</body>\r\n"
                             + "</html>";
 
@@ -116,16 +118,6 @@ public class ServerHandler implements Runnable {
                     outToClient.writeBytes(response);
 
                     s.close();
-                    // HTTP/1.1 405 Method Not Allowed
-                    // Content-Type: text/html
-                    // Content-Length: SIZE
-                    // Date: new Date();
-                    //
-                    // <html>
-                    // <body>
-                    // <h1>Method Not Allowed</h1>
-                    // </body>
-                    // </html>
                 }
             }
 
@@ -183,6 +175,54 @@ public class ServerHandler implements Runnable {
             e.printStackTrace();
         }
 
+    }
+
+    private static String getIpAddress(byte[] rawBytes) {
+        int i = 4;
+        StringBuilder ipAddress = new StringBuilder();
+        for (byte raw : rawBytes) {
+            ipAddress.append(raw & 0xFF);
+            if (--i > 0) {
+                ipAddress.append(".");
+            }
+        }
+        return ipAddress.toString();
+    }
+
+    private void printReport() throws IOException {
+        DateTimeFormatter reqDate = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime reqDateFormat = LocalDateTime.now();
+
+        byte[] ip = new byte[0];
+        InetSocketAddress socketAddress = (InetSocketAddress)clientSocket.getRemoteSocketAddress();
+        InetAddress clientIP = socketAddress.getAddress();
+        ip = clientIP.getAddress();
+        String ipAddress = getIpAddress(ip);
+
+        File userFile = new File(ipAddress);
+
+        if(!userFile.exists()) {
+            userFile.createNewFile();
+        }
+
+        try (FileWriter writer = new FileWriter(System.getProperty("user.home") + "\\Desktop\\" + ipAddress + ".txt");
+             BufferedWriter bw = new BufferedWriter(writer)) {
+
+            bw.write("Date: " + reqDate.format(reqDateFormat));
+            bw.newLine();
+            bw.write("Client IP: " + ipAddress);
+            bw.newLine();
+            bw.write("Request Domain: " + host);
+            bw.newLine();
+            bw.write("Resource Path: " + path);
+            bw.newLine();
+            bw.write("HTTP Method: " + method);
+            bw.newLine();
+            bw.write("Response Status Code: " + responseCode);
+
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+        }
     }
 
 }

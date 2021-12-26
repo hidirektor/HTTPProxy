@@ -19,7 +19,7 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#startServerAction" text="Start" />
                         <MenuItem mnemonicParsing="false" onAction="#stopServerAction" text="Stop" />
-                        <MenuItem mnemonicParsing="false" text="Report" />
+                        <MenuItem mnemonicParsing="false" onAction="#showReportPopup" text="Report" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#addHostToFilter" text="Add host to filter" />
                         <MenuItem mnemonicParsing="false" onAction="#displayFilteredHosts" text="Display current filtered hosts" />
@@ -40,8 +40,10 @@
                         <Font name="System Bold" size="14.0" />
                     </font></Label>
                 <ImageView fx:id="serverStatusImage" fitHeight="93.0" fitWidth="122.0" layoutX="351.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-                <Button layoutX="161.0" layoutY="71.0" mnemonicParsing="false" onAction="#openWindowsTerminal" text="Terminali Aç" />
-                <Button layoutX="351.0" layoutY="71.0" mnemonicParsing="false" onAction="#copyTestCode" text="Proxy Test Komutunu Kopyala !" />
+                <Button layoutX="50.0" layoutY="70.0" mnemonicParsing="false" onAction="#testGETMethod" text="Test &quot;GET&quot; Method" />
+                <Button layoutX="181.0" layoutY="70.0" mnemonicParsing="false" onAction="#testPOSTMethod" text="Test &quot;POST&quot; Method" />
+                <Button layoutX="320.0" layoutY="70.0" mnemonicParsing="false" onAction="#testHEADMethod" text="Test &quot;HEAD&quot; Method" />
+                <Button layoutX="460.0" layoutY="70.0" mnemonicParsing="false" onAction="#testCONNECTMethod" text="Test &quot;CONNECT&quot; Method" />
             </children>
         </AnchorPane>
     </children>
