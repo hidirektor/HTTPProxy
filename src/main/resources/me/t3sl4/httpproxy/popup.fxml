@@ -9,17 +9,12 @@
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
-                <Label layoutX="254.0" layoutY="150.0" prefHeight="35.0" prefWidth="177.0" text="Berkay Yemişen">
+                <Label layoutX="177.0" layoutY="150.0" prefHeight="53.0" prefWidth="261.0" text="Berkay Yemişen">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="36.0" />
                     </font>
                 </Label>
-                <Label layoutX="52.0" layoutY="195.0" text="berkayyemisen@gmail.com">
-                    <font>
-                        <Font size="24.0" />
-                    </font>
-                </Label>
-                <Label layoutX="24.0" layoutY="30.0" text="Developed by:">
+                <Label layoutX="24.0" layoutY="50.0" text="Developed by:">
                     <font>
                         <Font size="34.0" />
                     </font>
