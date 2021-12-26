@@ -12,14 +12,10 @@ import java.util.ResourceBundle;
 
 public class PopupController extends AbstractController implements Initializable {
     private Stage stage = null;
-    private Image developedByImage = new Image(getClass().getResourceAsStream("/images/developedby.png"));
-
-    @FXML
-    private ImageView developedByImageView;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        developedByImageView.setImage(developedByImage);
+
     }
 
     public void setStage(Stage stage) {

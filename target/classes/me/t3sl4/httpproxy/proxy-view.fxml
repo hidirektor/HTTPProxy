@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -35,15 +34,11 @@
         </MenuBar>
         <AnchorPane prefHeight="381.0" prefWidth="640.0">
             <children>
-                <Label alignment="CENTER" layoutX="167.0" layoutY="215.0" prefHeight="40.0" prefWidth="195.0" text="Proxy Server Status:">
+                <Label alignment="CENTER" layoutX="149.0" layoutY="160.0" prefHeight="40.0" prefWidth="195.0" text="Proxy Server Status:">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font></Label>
-                <ImageView fx:id="serverStatusImage" fitHeight="93.0" fitWidth="122.0" layoutX="351.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-                <Button layoutX="50.0" layoutY="70.0" mnemonicParsing="false" onAction="#testGETMethod" text="Test &quot;GET&quot; Method" />
-                <Button layoutX="181.0" layoutY="70.0" mnemonicParsing="false" onAction="#testPOSTMethod" text="Test &quot;POST&quot; Method" />
-                <Button layoutX="320.0" layoutY="70.0" mnemonicParsing="false" onAction="#testHEADMethod" text="Test &quot;HEAD&quot; Method" />
-                <Button layoutX="460.0" layoutY="70.0" mnemonicParsing="false" onAction="#testCONNECTMethod" text="Test &quot;CONNECT&quot; Method" />
+                <ImageView fx:id="serverStatusImage" fitHeight="93.0" fitWidth="122.0" layoutX="333.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
     </children>

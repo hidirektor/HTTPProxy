@@ -3,7 +3,6 @@ package me.t3sl4.httpproxy.Controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import me.t3sl4.httpproxy.Server.ServerHandler;
 import me.t3sl4.httpproxy.utils.AbstractController;
 
 import java.io.IOException;

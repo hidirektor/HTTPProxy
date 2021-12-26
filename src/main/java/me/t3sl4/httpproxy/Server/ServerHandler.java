@@ -135,9 +135,24 @@ public class ServerHandler implements Runnable {
             DataInputStream inFromServer = new DataInputStream(sSocket.getInputStream());
             DataOutputStream outToServer = new DataOutputStream(sSocket.getOutputStream());
 
-            pC.add("\r\nSending to server...\r\n" + "GET " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
 
-            outToServer.writeBytes("GET " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
+            if(method.equals("GET")) {
+                pC.add("\r\nSending to server...\r\n" + "GET " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
+
+                outToServer.writeBytes("GET " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
+            } else if(method.equals("POST")) {
+                pC.add("\r\nSending to server...\r\n" + "POST " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
+
+                outToServer.writeBytes("POST " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
+            } else if(method.equals("HEAD")) {
+                pC.add("\r\nSending to server...\r\n" + "HEAD " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
+
+                outToServer.writeBytes("HEAD " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
+            } else if(method.equals("CONNECT")) {
+                pC.add("\r\nSending to server...\r\n" + "CONNECT " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
+
+                outToServer.writeBytes("CONNECT " + path + " HTTP/1.1\r\n" + constructedHD + "\r\n");
+            }
 
             pC.add("HTTP request sent to: " + host);
 

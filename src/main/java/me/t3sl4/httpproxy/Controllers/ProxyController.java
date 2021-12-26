@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import me.t3sl4.httpproxy.HTTPProxy;
 import me.t3sl4.httpproxy.Server.ServerHandler;
 import me.t3sl4.httpproxy.utils.AbstractController;
-import me.t3sl4.httpproxy.utils.ClipboardUtils;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -75,49 +74,12 @@ public class ProxyController extends AbstractController implements Initializable
         showReportWindow();
     }
 
-    public void testGETMethod() {
-        try {
-            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"curl -v -H \"Connection: close\" -x http://localhost:8080 http://www.yandex.com.tr\"");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void testPOSTMethod() {
-        try {
-            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"curl -v -H \"Connection: close\" -x http://localhost:8080 http://www.yandex.com.tr\"");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void testHEADMethod() {
-        try {
-            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"curl -v -H \"Connection: close\" -x http://localhost:8080 http://www.yandex.com.tr\"");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void testCONNECTMethod() {
-        try {
-            Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"curl -v -H \"Connection: close\" -x http://localhost:8080 http://www.yandex.com.tr\"");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void addHostToFilter() {
         showAddFilterWindow();
     }
 
     public void displayFilteredHosts() {
         showFilteredHostsWindow();
-    }
-
-    public void copyTestCode() {
-        String testCmd = "curl -v -H \"Connection: close\" -x http://localhost:8080 http://www.yandex.com.tr";
-        ClipboardUtils.copyToClipboardText(testCmd);
     }
 
     public void exitProgram() {
